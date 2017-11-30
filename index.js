@@ -24,7 +24,8 @@ module.exports = {
             var stat = fs.statSync(path.join(path.join(excludedPath, includedPath), file));
             if (stat && stat.isDirectory() && (depth > 1 || depth === 0)) // is a directory and depth ok?
                 results = results.concat(listSync(excludedPath, path.join(includedPath, file), (depth > 1 ? depth-1 : depth)));
-            else if (stat && !stat.isDirectory()) results.push(path.join(includedPath, file))
+            else if (stat && !stat.isDirectory())
+                results.push(path.join(includedPath, file))
         });
         return results;
     },
