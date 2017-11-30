@@ -19,12 +19,12 @@ function successResponse(resolve, callback, result){
 module.exports = {
     listSync: function listSync(excludedPath, includedPath, depth){
         var results = [];
-        var list = fs.readdirSync(excludedPath + includedPath);
+        var list = fs.readdirSync(path.join(excludedPath, includedPath));
         list.forEach(function(file) {
-            var stat = fs.statSync(excludedPath + includedPath + '/' + file);
+            var stat = fs.statSync(path.join(path.join(excludedPath, includedPath), file));
             if (stat && stat.isDirectory() && (depth > 1 || depth === -1))
-                results = results.concat(listSync(excludedPath, includedPath + '/' + file, (depth > 1 ? depth-1 : depth)));
-            else if (stat && !stat.isDirectory()) results.push(includedPath + '/' + file)
+                results = results.concat(listSync(excludedPath, path.join(includedPath, file), (depth > 1 ? depth-1 : depth)));
+            else if (stat && !stat.isDirectory()) results.push(path.join(includedPath, file))
         });
         return results;
     },
@@ -32,7 +32,7 @@ module.exports = {
         return new Promise(function(resolve, reject){
             var paths = [];
             var recursivePromises = [];
-            fs.readdir(excludedPath + includedPath, function(err, folderItems){
+            fs.readdir(path.join(excludedPath, includedPath), function(err, folderItems){
                 if(err){
                     errorResponse(resolve, reject, callback, err);
                 }else{
@@ -42,7 +42,7 @@ module.exports = {
                                 recursivePromises.push(new Promises(function(resolve, reject){reject(err);}));
                             }else{
                                 if (stat && stat.isDirectory() && (depth > 1 || depth === 0)){ // is a directory and depth ok?
-                                    recursivePromises.push(list(excludedPath, includedPath + '/' + file, (depth > 1 ? depth-1 : depth)));
+                                    recursivePromises.push(list(excludedPath, path.join(includedPath, file), (depth > 1 ? depth-1 : depth)));
                                 }else if (stat && !stat.isDirectory()){
                                     paths.push(path.join(includedPath, file));
                                 }
