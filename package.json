@@ -1,5 +1,5 @@
 {
-  "name": "walkdir",
+  "name": "walk-dir",
   "version": "0.0.1",
   "description": "\"Walk\" through a directory, revealing the contained folders and files in a practical way",
   "main": "index.js",

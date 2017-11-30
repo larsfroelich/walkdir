@@ -1,4 +1,4 @@
-# walkDir
+# walk-Dir
 NPM-Module used to "walk" through a directory, revealing the contained folders and files in a practical way.
 
 ## Why
@@ -6,7 +6,10 @@ Oftentimes when working with a node.js application, it is necessary to retrieve 
 This is useful e.g. when building an express.js-router or for bootstrapping child-modules automatically.
 
 ##Setup
-Install walkDir via `npm install walkdir --save`
+Install walkDir via `npm install walk-dir --save`
+
+Make sure not to confuse this module with "walkdir", this is "walk-dir"!
+
 
 ## Usage
 1) Require walkDir using
