@@ -22,7 +22,7 @@ module.exports = {
         var list = fs.readdirSync(path.join(excludedPath, includedPath));
         list.forEach(function(file) {
             var stat = fs.statSync(path.join(path.join(excludedPath, includedPath), file));
-            if (stat && stat.isDirectory() && (depth > 1 || depth === -1))
+            if (stat && stat.isDirectory() && (depth > 1 || depth === 0)) // is a directory and depth ok?
                 results = results.concat(listSync(excludedPath, path.join(includedPath, file), (depth > 1 ? depth-1 : depth)));
             else if (stat && !stat.isDirectory()) results.push(path.join(includedPath, file))
         });
