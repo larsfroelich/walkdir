@@ -65,7 +65,7 @@ module.exports = {
         folderItems.forEach(function(file){
             var stat = fs.statSync(path.join(path.join(excludedPath, includedPath), file));
             if (stat && stat.isDirectory() && (depth > 1 || depth === 0)) // is a directory and depth ok?
-                tree[path.join(includedPath, file)] = treeSync(path.join(excludedPath, includedPath), file, (depth > 1 ? depth-1 : depth));
+                tree[path.join(includedPath, file)] = treeSync(path.join(path.join(excludedPath, includedPath), file), "", (depth > 1 ? depth-1 : depth));
             else if (stat && !stat.isDirectory())
                 tree[path.join(includedPath, file)] = true;
         });
