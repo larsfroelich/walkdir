@@ -59,7 +59,7 @@ module.exports = {
             });
         })
     },
-    treeSync : function(excludedPath, includedPath, depth){
+    treeSync : function treeSync(excludedPath, includedPath, depth){
         var folderItems = fs.readdirSync(path.join(excludedPath, includedPath));
         var tree = {};
         folderItems.forEach(function(file){
